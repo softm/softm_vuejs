@@ -15,7 +15,11 @@
  - 하나의 페이지 안에서 필요한 영역 부분만 로딩.
  - 빠른 페이지 변환
  - 적은 트래픽 양
+### # Install vscode
+ - https://code.visualstudio.com/download
 
+### # Install vetur plugin 
+ - https://marketplace.visualstudio.com/items?itemName=octref.vetur
 #### # VUE cli : https://github.com/vuejs/vue-cli/tree/v2#vue-cli--
  - ```npm install -g npx```
  - ```npm install --global yarn```

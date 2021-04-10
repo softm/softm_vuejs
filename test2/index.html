@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .red {
+            color:red;
+        }
+        .bold { 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+<br/>
+<B># data<br/></B>
+        {{person.name}} /
+        {{person.age}} /
+        <br>
+        {{getPersonValue()}}
+<br/><br/>
+<B># v-bind<br/></B>
+        <input v-bind:type="type" v-bind:value="inputValue"/> 
+        <!-- is same -->
+        <input :type="type" :value="inputValue"/> 
+<br/><br/>
+<B># v-on - click - method<br/></B>
+        <button v-on:click="plus">plus</button>
+        <button v-on:click="minus">minus</button>
+        <!-- is same -->
+        <button @click="plus">plus</button>
+        <button @click="minus">minus</button>
+<br/><br/>
+<B># v-on - submit<br/></B>
+        <form v-on:submit.prevent="submit" action="http://naver.com">
+            <input type="text" :value="text" @keyup="updateText"><br>
+            <input type="text" :value="text"><br>
+            <input type="text" v-model="text"><br>
+            <button type="submit">submit</button>
+        </form>
+<br/><br/>
+<B># computed <br/></B>
+        <input type="text" v-model="msg">
+        <button @click="changeMessage(msg)">click</button>
+        {{reverseMessage}}
+<br/><br/> 
+<B># watch<br/></B>
+        {{data1}} / {{!isChange?"변경전":"변경됨"}}
+        <button @click="updateData">Click</button>
+<br/><br/>
+<B># class <br/></B>
+        {{messageUpdated?"갱신됨":"갱신전"}}
+        <div :class="{red: isRed, bold: isBold}">Hello</div>
+        <button @click="updateColor">Click</button>
+<br><br/>
+<B># style<br/></B>
+        <div :style="{color: red, fontSize: size}">Hello</div>
+<br/>
+<B># v-if case 1<br/></B>
+<template v-if="show">
+    <div>t-if1</div>
+    <div>t-if2</div>
+    <div>t-if3</div>
+    <div>t-if4</div>
+</template>
+        <div v-if="show">if1</div>
+        <div v-if="show">if2</div>
+        <div v-if="show">if3</div>
+        <div v-if="show">if4</div>
+        <div v-else="show">else</div>
+        <button @click="toggleShow">toggleShow</button>
+<br/><br/>
+<B># v-if case 2<br/></B>
+        <div v-if="number === 1">if1</div>
+        <div v-else-if="number === 2">if2</div>
+        <div v-else>ifelse</div>
+        <button @click="increaseNumber">Increase</button> {{ number }}
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data : {
+                person : {
+                    name : "ji hoon",
+                    age: 46
+                },
+                text:"",
+                type:"number",
+                inputValue:"1234",
+                helloMessage : "안녕하세요",
+                msg:"변경하세요",
+                messageUpdated:false,
+                isRed:false,
+                isBold:false,
+                data1:"test",
+                isChange:false,
+                red:"red",
+                size:"30px",
+                show:true,
+                number:1,
+            },
+            computed :{
+                reverseMessage() {
+                    return this.helloMessage.split("").reverse().join("");
+                }
+            },
+            methods : {
+                increaseNumber(){
+                    this.number++;
+                },
+                toggleShow() {
+                    this.show = !this.show;
+                },
+                updateColor(){
+                    this.isRed = !this.isRed;
+                    this.isBold = !this.isBold;
+                },
+                changeMessage(v){
+                    this.helloMessage = v?"직접:"+v:this.msg;
+                    this.messageUpdated = true;
+                },
+                updateText(event){
+                    this.text = event.target.value;
+                },
+                submit() {
+                    alert("submit");
+                },
+                getPersonValue : function() {
+                    return this.person.name + " / " + this.person.age;
+                },
+                plus() {
+                    this.person.age++;
+                },
+                minus() {
+                    this.person.age--;
+                },
+                updateData(){
+                    this.data1 = "changed";
+                },
+                
+            },
+            watch: {
+                helloMessage(newValue, oldValue) {
+                    console.log(newValue,oldValue);
+                    this.messageUpdated = true;
+                },
+                data1(newValue, oldValue) {
+                    console.log(newValue,oldValue);
+                    this.isChange = true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

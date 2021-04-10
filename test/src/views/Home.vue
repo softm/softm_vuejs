@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="{backgroundColor:bgColor}">
         <h1>{{mainTitle}} to {{title}}</h1>
         <input type="text" v-model="input1"/>
         <button type="button" @click="getValue">get</button>
@@ -20,6 +20,7 @@
 export default {
     data() {
         return {
+            bgColor:'yellowGreen',
             mainTitle : "Welcome",
             title : "개발자의 품격",
             input1: "입력값.",
@@ -29,7 +30,7 @@ export default {
               , {v:"B",t:"Busan"}
             ],
             region:"S",
-            tableShow : true
+            tableShow : true,
         }
     },
     watch: {
