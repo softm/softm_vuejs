@@ -35,3 +35,7 @@
 #### # Vue Bootstrap
  - https://bootstrap-vue.org/
  - 
+
+#### # Vue Lifecycle 
+ - https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
+ - 
