@@ -246,5 +246,119 @@ computed: {
  - https://v3.ko.vuejs.org/guide/conditional.html#v-if-%E1%84%83%E1%85%A2-v-show
  - v-show는 렌더링은 되고 display none임
 
+#### # v-for
+ - https://v3.ko.vuejs.org/guide/list.html#v-for로-엘리먼트에-배열-매핑하기
+: html
+```html
+<div id="app">
+<B># v-for case 1<br/></B>
+<div> {{people[0].name}} / {{people[0].age}}</div>
+<div> {{people[1].name}} / {{people[1].age}}</div>
+<div> {{people[2].name}} / {{people[2].age}}</div>
+<B># v-for case 2<br/></B>
+<div v-for="person in people"> {{person.name}} / {{person.age}}</div>
+<div :key="idx" v-for="(person,idx) in people"> {{person.name}} / {{person.age}} / {{idx}}</div>
+</div>
+```
+: js
+```js
+<script>
+    new Vue({
+        el:"#app",
+        data : {
+                people : [
+                    {
+                        name : "eun joo",
+                        age: 43
+                    },
+                    {
+                        name : "yeon seo",
+                        age: 8
+                    },
+                    {
+                        name : "ji hoon",
+                        age: 46
+                    },
+                ]
+        }
+    });
+</script>
+```
+#### # component
+: html
+```html
+<br/><br/>
+<B># component 1<br/></B>
+<test-button></test-button>
+<test-button></test-button>
+```
+: js
+```js
+<script>
+       Vue.component("hello-world", {
+            template:`
+                <div>Hello World</div>
+            ` 
+       });
+        Vue.component("test-button", {
+            template:`
+            <div>
+                <hello-world></hello-world>
+                {{ name }}<br/>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name:"softm"
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = "softm updated";
+                }
+            }
+        }
+        );
+</script>
+```
 
----- https://www.youtube.com/watch?v=HAegTAEW1Y0
+#### # component - 지역
+: html
+```html
+<br/><br/>
+<B># component 1<br/></B>
+<test-button></test-button>
+<test-button></test-button>
+```
+: js
+```js
+<script>
+        const TestButton = {
+            template:`
+            <div>
+                <hello-world></hello-world>
+                {{ name }}<br/>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name:"softm"
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = "softm updated";
+                }
+            }
+        };
+        new Vue({
+            el:"#app",
+            components:{
+                "test-button" : TestButton
+            }
+        );
+</script>
+```
+
