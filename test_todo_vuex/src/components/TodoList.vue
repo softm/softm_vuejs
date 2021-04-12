@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Todo 
-            v-for="todo in todos" 
+        <Todo
+            v-for="todo in todos"
             :key="todo.id"
             :todo="todo"
             @toggle-checkbox="toggleCheckbox"
@@ -9,25 +9,28 @@
         />
     </div>
 </template>
+
 <script>
 import Todo from '@/components/Todo.vue';
 export default {
-    components:{
+    components: {
         Todo
     },
-    props:{
-        todos:{
-            type: Array,
-            required:true
+    computed: {
+        todos() {
+            return this.$store.state.todos;
         }
     },
-    methods:{
-        toggleCheckbox(value){
-            this.$emit('toggle-checkbox',value)
+    methods: {
+        toggleCheckbox(value) {
+            this.$emit('toggle-checkbox', value)
         },
         deleteTodo(todoId) {
-            this.$emit('click-delete',todoId);
+            this.$emit('click-delete', todoId);
         }
     }
 }
 </script>
+
+<style>
+</style>

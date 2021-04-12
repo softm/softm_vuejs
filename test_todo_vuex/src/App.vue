@@ -1,62 +1,25 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <h1 class="text-center">Todo App</h1>
-    <CompletedTodo :todos="todos" />
-    <AddTodo @add-todo="addTodo"/>
+    <CompletedTodo />
+    <AddTodo />
     <hr>
-    <TodoList 
-      :todos="todos"
-      @toggle-checkbox="toggleCheckbox"
-      @click-delete="deleteTodo"
-    />
+    <TodoList />
+    <UserList />
   </div>
 </template>
 
 <script>
-import TodoList from '@/components/TodoList.vue';
-import AddTodo from '@/components/AddTodo.vue';
-import CompletedTodo from '@/components/CompletedTodo.vue';
+import TodoList from '@/components/TodoList';
+import AddTodo from '@/components/AddTodo';
+import CompletedTodo from '@/components/CompletedTodo';
+import UserList from '@/components/UserList';
 export default {
-  name: 'App',
   components: {
     TodoList,
     AddTodo,
-    CompletedTodo
+    CompletedTodo,
+    UserList,
   },
-  data() {
-    return {
-        todos:[
-          {id : 1, text: 'bur a car', checked:false},
-          {id : 2, text: 'bur a cylce', checked:false},
-        ],
-        todoText:""
-    }
-  },
-  methods:{
-    deleteTodo(id){
-      const index = this.todos.findIndex(todo => {
-        return todo.id === id;
-      });
-      this.todos.splice(index,1);
-    },
-    addTodo(value) {
-      console.log(value);
-      this.todos.push({
-        id:Math.random(),
-        text:value,
-        checked:false,
-      });
-    },
-    toggleCheckbox({id, checked}){
-      console.log(id, checked);
-      const index = this.todos.findIndex(todo => {
-        return todo.id === id;
-      });
-      this.todos[index].checked = checked;
-    }
-  }
 }
 </script>
-
-<style>
-</style>
