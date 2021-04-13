@@ -8,19 +8,47 @@
 </template>
 
 <script>
+    import {mapState,mapActions} from 'vuex';
+
     export default {
         created() {
             this.getUsers();
         },
         computed: {
-            users() {
-                return this.$store.state.users;
-            }
+            ...mapState('user',['users']
+/*
+                {
+                    people:state => state.users
+                }
+*/
+/*                                 
+                {
+                    people:state => state.user.users
+                }
+*/
+/*
+                {
+                    // 'todos',                    
+                    people:'users'
+                } 
+*/
+/*
+                [
+                    // 'todos',                    
+                    'users'
+                ],
+*/
+            )
+            // users() {
+            //     return this.$store.state.users;
+            // }
         },
         methods: {
-            getUsers() {
-                this.$store.dispatch('getUsers');
-            }
+            ...mapActions('user',['getUsers'])
+            // ...mapActions(['getUsers'])
+            // getUsers() {
+            //     this.$store.dispatch('getUsers');
+            // }
         }
     }
 </script>

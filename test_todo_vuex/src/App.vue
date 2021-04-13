@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <h1 class="text-center">Todo App</h1>
+    <h1 class="text-center">~~</h1>
     <CompletedTodo />
     <AddTodo />
     <hr>
